@@ -1,0 +1,29 @@
+version: '3.6'
+services:
+  hellodocker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 60235:60234
+    volumes:
+      - .:/go/src/hellodocker
+    networks:
+      - backend
+    restart: always
+    container_name: webapp
+    links:
+      - mock-server
+  mock-server:
+    image: jamesdbloom/mockserver
+    ports:
+      - 1080:1080
+    networks:
+      - backend
+    container_name: mock-server
+networks:
+  backend:
+
+
+
+
